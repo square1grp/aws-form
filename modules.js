@@ -2,6 +2,7 @@ require('dotenv').config()
 const axios = require('axios')
 const moment = require('moment')
 const crypto = require('crypto');
+const { RSA_NO_PADDING } = require('constants');
 var amazonMws = require('amazon-mws')(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY)
 
 module.exports = {
@@ -14,12 +15,12 @@ module.exports = {
         'AmazonOrderId': orderId
       }, (err, res) => {
         if (err) {
-          resolve([])
+          resolve(null)
         } else {
           try {
             resolve(res.OrderItems['OrderItem'])
           } catch (error) {
-            resolve([])
+            resolve(null)
           }
         }
       })
