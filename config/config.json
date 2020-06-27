@@ -8,10 +8,10 @@
     "dialect": "postgres"
   },
   "development": {
-    "username": "postgres",
-    "password": "rfSy5%6tIuUE",
-    "database": "aws_mws_form_development",
-    "host": "aws-mws-form.cfis9c9h8fwx.us-west-2.rds.amazonaws.com",
+    "username": "root",
+    "password": null,
+    "database": "database_development",
+    "host": "postgres",
     "port": 5432,
     "dialect": "postgres"
   },
