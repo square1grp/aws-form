@@ -34,15 +34,17 @@ app.post('/', (req, res) => {
         }
       })
       break
-    case 'save-email':
+
+    case 'save-comment':
       params = JSON.parse(req.body.json)
 
-      modules.saveEmail(params.email)
+      modules.saveComment(params.email, params.comment)
 
       res.send({
         'status': 'success'
       })
       break
+
     default:
       res.send('"action" is not determined.')
   }

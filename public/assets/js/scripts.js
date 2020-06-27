@@ -180,20 +180,19 @@ $(document).ready(function () {
           motab = 0;
           let stars = repeat('<span class="text-star"></span>', 5);
           html = `
-					<div class="wizard-text">
-						<p class="text-rate">${texts['02_text-rate']}</p>
-					</div>
-					<div class="wizard-stars">
-						<p class="text-stars">${stars}</p>
-					</div>
-					<div class="wizard-text">
-						<h4 class="text-info-after-stars">${texts['02_after-stars']}</h4>
-						<p class="text-find-it"><a href="" id="findAnother">${texts['02_find-another']}</a></p>
-					</div>`;
+            <div class="wizard-text">
+              <p class="text-rate">${texts['02_text-rate']}</p>
+            </div>
+            <div class="wizard-stars">
+              <p class="text-stars">${stars}</p>
+            </div>
+            <div class="wizard-text">
+              <h4 class="text-info-after-stars"></h4>
+              <p class="text-find-it"><a href="" id="findAnother"></a></p>
+            </div>`;
 
           $wizard.html(html);
 
-          $('#findAnother').off('click');
           $('.text-star').off('mouseover mouseout mouseleave click');
 
           $('.text-star').on('mouseover', function (e) {
@@ -232,44 +231,146 @@ $(document).ready(function () {
               });
             });
           });
-
-          $('#findAnother').click(function (e) {
-            $('#findAnother').off('click');
-            $('.text-star').off('mouseover mouseout mouseleave click');
-            closeState(0);
-            return false;
-          });
         })();
         break;
+      case 3:
       case 4:
-        // 5 stars and an offer to leave a review on Amazon.
+        // 4 or 5 stars and an offer to leave a review on Amazon.
         (function () {
           motab = 1;
+          let stars = repeat('<span class="text-star__yellow" />', 4) + '<span class="text-star' + (user['stars'] > 4 ? "__yellow" : "") + '"/>';
+          let is_input_ok = false;
+
           html = `
-				<div class="wizard-text">
-					<h4 class="text-info">${texts['04_text-info']}</h4>
-				</div>
-				<div class="wizard-leave-feedback">
-					<h3 class="text-leave-feedback"><a class="leave-button orange" href="${links['create-review']}" target="_blank">${texts['04_leave-feedback']}</a></h3>
-					<p class="text-leave-small"><a href="${links['create-review']}" target="_blank">${texts['04_small-feedback']}</a></p>
-				</div>
-				<div class="wizard-text">
-					<h4 class="text-info">${texts['04_return-for-gift']}</h4>
-				</div>`;
+            <div class="wizard-stars">
+              <p class="text-stars">${stars}</p>
+            </div>
+            <div class="wizard-text">
+              <h4 class="text-info">${texts['04_text-info']}</h4>
+            </div>
+            <form class="form-email-short">
+              <label class="email-label" for="email">Your email</label>
+              <input class="email-input" id="email" name="email" type="text" value="" maxlength="60" autocomplete="off">
+              <label id="errorMessage" class="email-error" for="email">${texts['04_email-error']}</label>
+              <label class="comment-label" for="comment">Your comment</label>
+              <textarea class="comment-input" id="comment" name="comment" rows="5" cols="65"></textarea>
+            </form>
+            <div class="wizard-leave-feedback">
+              <h3 class="text-leave-feedback"><a class="leave-button orange" href="javascript:void(0)">${texts['04_leave-feedback']}</a></h3>
+            </div>
+            <div id="popup">
+              <p>You have copied your comment - you can paste this in the next step</p>
+              <a href="javascript:void(0)">OK</a>
+            </div>`;
 
           $wizard.html(html);
 
           $('.wizard-leave-feedback a').off('click');
 
           $('.wizard-leave-feedback a').click(function (e) {
-            $('.wizard-leave-feedback a').off('click');
-            closeState(5);
+            if (is_input_ok) {
+              user['email'] = $('#email').val().trim();
+              user['comment'] = $('#comment').val();
+
+              $('.email-input').off('input focus blur');
+              API(user, 'save-comment');
+
+              function API(json, action) {
+                var data = {};
+                data['action'] = action;
+                data['json'] = JSON.stringify(json);
+
+                $.ajax({
+                  type: 'POST',
+                  url: '/',
+                  data: data,
+                  timeout: 12000,
+                  success: urlSuccess,
+                  error: urlError,
+                  complete: urlComplete,
+                  dataType: 'json'
+                });
+
+                function urlSuccess(arr, txtStatus, xhr) {
+                  if (arr['status'] == 'success') {
+                    /* Get the text field */
+                    var copyText = document.getElementById("comment");
+
+                    /* Select the text field */
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+                    /* Copy the text inside the text field */
+                    document.execCommand("copy");
+
+                    var $popup = $("#popup");
+                    $popup.show();
+                    window.getSelection().removeAllRanges();
+
+                    $(e.target).off('click');
+
+                    $("#popup a").click(function () {
+                      $popup.hide();
+
+                      closeState(5);
+                    });
+                  }
+                  else {
+                    console.log('Error', arr);
+                  }
+                }
+              }
+            } else {
+              var $err = $('#errorMessage');
+              $err.animate({ opacity: 0.0 }, dr / 2, function () {
+                $err.html(texts['04_email-error']).css({ opacity: 0.0, visibility: 'visible' });
+                $err.animate({ opacity: 1.0 }, dr);
+              });
+            }
+
             return true;
           });
+
+          $('form').off('submit');
+          $('.email-input').off('input focus blur');
+
+          $('form').submit(false);
+
+          $('.email-input').on('input focus blur', function (e) {
+            is_input_ok = inputCheck(e.type, $(e.target));
+          });
+
+          function inputCheck(type, $elm) {
+            var ret = false;
+            var reg = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+            var txt = '';
+            var val = $elm.val().trim();
+            if (val) {
+              if (!reg.test(val)) {
+                txt = texts['04_email-error'];
+                reg = /^[^@\s]+$|^[^@\s]+@$|^[^@\s]+@[^@\s]+$|^[^@\s]+@[^@\s]+\.$|^[^@\s]+@[^@\s]+\.[^@\s]{1}$/;
+                if (type != 'blur') if (reg.test(val)) { txt = ''; }
+              } else {
+                ret = true;
+              }
+            }
+            var $err = $('#errorMessage');
+            var msg = $('#errorMessage').html();
+            if (txt != msg) {
+              $err.animate({ opacity: 0.0 }, dr / 2, function () {
+                if (txt != '') {
+                  $err.html(txt).css({ opacity: 0.0, visibility: 'visible' });
+                  $err.animate({ opacity: 1.0 }, dr);
+                } else {
+                  $err.html(txt).css({ opacity: 0.0, visibility: 'hidden' });
+                }
+              });
+            }
+
+            return ret;
+          }
         })();
         break;
-      case 3:
-      // 4 stars.
       case 5:
         // Timer receiving the voucher.
         (function () {

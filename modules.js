@@ -27,7 +27,7 @@ module.exports = {
     });
   },
 
-  saveEmail: (email) => {
+  saveComment: (email, comment) => {
     return true
   }
 }
