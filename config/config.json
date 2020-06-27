@@ -8,9 +8,9 @@
     "dialect": "postgres"
   },
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
+    "username": "aws_mws_user",
+    "password": "u3$5vmRiWyqv",
+    "database": "aws_mws_form_development",
     "host": "postgres",
     "port": 5432,
     "dialect": "postgres"
