@@ -51,7 +51,8 @@ $(document).ready(function () {
 
   function initState(...args) {
     var $wizard = $('.wizard-body');
-    var html
+    var html;
+
     switch (args[0]) {
       case 0:
         // Start screen.
@@ -312,7 +313,7 @@ $(document).ready(function () {
                     $("#popup a").click(function () {
                       $popup.hide();
 
-                      closeState(5);
+                      closeState(4.5);
                     });
                   }
                   else {
@@ -369,6 +370,36 @@ $(document).ready(function () {
 
             return ret;
           }
+        })();
+        break;
+      case 4.5:
+        (function () {
+          motab = 1;
+
+          html = `
+            <div class="wizard-text">
+              <h4 class="text-info">${texts['04_text-info-2']}</h4>
+            </div>
+            <div class="wizard-leave-feedback">
+              <h3 class="text-leave-feedback"><a class="leave-button orange" href="https://www.amazon.com/gp/css/order-history" target="_blank">${texts['04_leave-feedback-2']}</a></h3>
+              <p class="text-leave-small"><a href="https://www.amazon.com/gp/css/order-history" target="_blank">${texts['04_small-feedback']}</a></p>
+            </div>
+            <div class="wizard-leave-feedback">
+              <h4 class="text-info"><a href="${links['create-review']}" target="_blank">${texts['04_write-a-review']}</a></h4>
+            </div>
+            <div class="wizard-text">
+              <p style="margin-left: 10%; margin-right: 10%;">${texts['04_text-after-write-a-review']}</p>
+            </div>`;
+
+          $wizard.html(html);
+
+          $('.wizard-leave-feedback a').off('click');
+
+          $('.wizard-leave-feedback a').click(function (e) {
+            $('.wizard-leave-feedback a').off('click');
+            closeState(5);
+            return true;
+          });
         })();
         break;
       case 5:
