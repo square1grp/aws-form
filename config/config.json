@@ -11,7 +11,7 @@
     "username": "aws_mws_user",
     "password": "u3$5vmRiWyqv",
     "database": "aws_mws_form_development",
-    "host": "postgres",
+    "host": "aws-mws-db.cfis9c9h8fwx.us-west-2.rds.amazonaws.com",
     "port": 5432,
     "dialect": "postgres"
   },
