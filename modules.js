@@ -1,9 +1,6 @@
 require('dotenv').config()
-const axios = require('axios')
-const moment = require('moment')
-const crypto = require('crypto');
-const { RSA_NO_PADDING } = require('constants');
 var amazonMws = require('amazon-mws')(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY)
+const { Comment } = require('./models')
 
 module.exports = {
   getOrder: (orderId) => {
@@ -27,7 +24,9 @@ module.exports = {
     });
   },
 
-  saveComment: (email, comment) => {
+  saveComment: async (email, comment) => {
+    await Comment.create({ email, comment });
+
     return true
   }
 }
