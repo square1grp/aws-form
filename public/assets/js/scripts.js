@@ -10,7 +10,7 @@ $(document).ready(function () {
   }
   var user = {};
 
-  initState(0);
+  initState(6);
 
   function resizeNavigation() {
     let $nav = $('.navigation-button').eq(motab);
@@ -433,92 +433,125 @@ $(document).ready(function () {
         (function () {
           motab = 2;
           html = `
-				<div class="wizard-text">
-					<h4 class="text-info">${texts['06_text-email-45']}</h4>
-				</div>
-				<form class="form-email">
-					<label class="email-label" for="email">${texts['06_buyer-email']}</label>
-					<input class="email-input" id="email" name="email" type="text" value="" maxlength="60" autocomplete="off">
-					<label id="errorMessage" class="email-error" for="email">${texts['06_email-error']}</label>
-				</form>
-				<div class="wizard-text"><p id="emailSend" class="text-send-it__disabled" style="opacity: 0.35;">${texts['06_send']}</p></div>`;
+            <div class="wizard-text">
+              <h4 class="text-info">${texts['06_text-email-45']}</h4>
+            </div>
+            <form class="form-email-short">
+              <div class="form-group-row">
+                <div class="form-group-col">
+                  <label class="first_name-label required" for="first_name">First Name</label>
+                  <input class="first_name-input" id="first_name" name="first_name" type="text" value="" maxlength="60" autocomplete="off" required>
+                </div>
+                
+                <div class="form-group-col">
+                  <label class="last_name-label required" for="last_name">Last Name</label>
+                  <input class="last_name-input" id="last_name" name="last_name" type="text" value="" maxlength="60" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-group-col">
+                  <label class="email-label required" for="email">Email</label>
+                  <input class="email-input" id="email" name="email" type="email" value="" maxlength="60" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-group-col">
+                  <label class="address-label required" for="email">Address</label>
+                  <input class="address-input" id="address" name="address" type="text" value="" maxlength="60" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-group-col">
+                  <label class="city-label required" for="city">City</label>
+                  <input class="city-input" id="city" name="city" type="text" value="" maxlength="60" autocomplete="off" required>
+                </div>
+                
+                <div class="form-group-col">
+                  <label class="state-label required" for="state">State</label>
+                  <input class="state-input" id="state" name="state" type="text" value="" maxlength="60" autocomplete="off" required>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-group-col">
+                  <label class="zipcode-label required" for="email">Zip code</label>
+                  <input class="zipcode-input" id="zipcode" name="zipcode" type="text" value="" maxlength="60" autocomplete="off">
+                </div>
+                
+                <div class="form-group-col">
+                  <label class="phone-label" for="phone">Phone</label>
+                  <input class="phone-input" id="phone" name="phone" type="text" value="" maxlength="60" autocomplete="off">
+                </div>
+              </div>
+
+              <br/>
+
+              <input type="radio" id="receive_by_email" name="receive_by" value="email" checked>
+              <label for="receive_by_email">Yes! Please sign me up to receive offers in my email.</label><br/>
+              <input type="radio" id="receive_by_sms" name="receive_by" value="sms">
+              <label for="receive_by_sms">Yes! Please sign me up to receive offers by text message.</label><br/>
+
+              <br/>
+
+              <button submit>Submit</button>
+            </form>
+            </div>`;
 
           $wizard.html(html);
 
           $('form').off('submit');
-          $('.email-input').off('input focus blur');
 
-          $('form').submit(false);
+          $('form').submit(function () {
+            var data = {};
+            data['action'] = 'make-an-offer';
 
-          $('.email-input').on('input focus blur', function (e) {
-            inputCheck(e.type, $(e.target));
-          });
+            var receive_by_options = document.getElementsByName('receive_by');
+            var receive_by;
 
-          function inputCheck(type, $elm) {
-            var ret = false;
-            var reg = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
-            var txt = '';
-            var val = $elm.val().trim();
-            if (val) {
-              if (!reg.test(val)) {
-                txt = texts['06_email-error'];
-                reg = /^[^@\s]+$|^[^@\s]+@$|^[^@\s]+@[^@\s]+$|^[^@\s]+@[^@\s]+\.$|^[^@\s]+@[^@\s]+\.[^@\s]{1}$/;
-                if (type != 'blur') if (reg.test(val)) { txt = ''; }
-              } else {
-                ret = true;
+            for (var i = 0, length = receive_by_options.length; i < length; i++) {
+              if (receive_by_options[i].checked) {
+                receive_by = receive_by_options[i].value;
+                break;
               }
             }
-            var $err = $('#errorMessage');
-            var msg = $('#errorMessage').html();
-            if (txt != msg) {
-              $err.animate({ opacity: 0.0 }, dr / 2, function () {
-                if (txt != '') {
-                  $err.html(txt).css({ opacity: 0.0, visibility: 'visible' });
-                  $err.animate({ opacity: 1.0 }, dr);
-                } else {
-                  $err.html(txt).css({ opacity: 0.0, visibility: 'hidden' });
-                }
-              });
+
+            data['json'] = JSON.stringify({
+              first_name: $("#first_name").val().trim(),
+              last_name: $("#last_name").val().trim(),
+              email: $("#email").val().trim(),
+              address: $("#address").val().trim(),
+              city: $("#city").val().trim(),
+              state: $("#state").val().trim(),
+              zipcode: $("#zipcode").val().trim(),
+              phone: $("#phone").val().trim(),
+              receive_by: receive_by
+            });
+
+            $.ajax({
+              type: 'POST',
+              url: '/',
+              data: data,
+              timeout: 12000,
+              success: urlSuccess,
+              error: urlError,
+              complete: urlComplete,
+              dataType: 'json'
+            });
+
+            function urlSuccess(arr, txtStatus, xhr) {
+              if (arr['status'] == 'success') {
+                closeState(7);
+              }
+              else {
+                console.log('Error', arr);
+              }
             }
-            if (ret) {
-              user['email'] = val;
-              $('#emailSend').removeClass('text-send-it__disabled').addClass('text-send-it').off('click').on('click', function (e) {
-                $(e.target).off('click');
-                $('.email-input').off('input focus blur');
-                API(user, 'save-email');
 
-                function API(json, action) {
-                  var data = {};
-                  data['action'] = action;
-                  data['json'] = JSON.stringify(json);
-
-                  $.ajax({
-                    type: 'POST',
-                    url: '/',
-                    data: data,
-                    timeout: 12000,
-                    success: urlSuccess,
-                    error: urlError,
-                    complete: urlComplete,
-                    dataType: 'json'
-                  });
-
-                  function urlSuccess(arr, txtStatus, xhr) {
-                    if (arr['status'] == 'success') {
-                      closeState(7);
-                    }
-                    else {
-                      console.log('Error', arr);
-                    }
-                  }
-                }
-
-              }).animate({ opacity: 1.0 }, dr);
-            }
-            else {
-              $('#emailSend').removeClass('text-send-it').addClass('text-send-it__disabled').off('click').animate({ opacity: .35 }, dr);
-            }
-          }
+            return false;
+          });
         })();
         break;
       case 7:
@@ -535,8 +568,7 @@ $(document).ready(function () {
 					</div>
 					<div class="wizard-text">
 						<h4 class="text-info-thanks">${texts['07_thank-you-45']}</h4>
-					</div>
-					<div class="wizard-club">` + (user['stars'] == 5 ? `<h3 class="text-club"><a class="club-button orange" href="${texts['07_chat-link']}">${texts['07_chat-text']}</a></h3>` : ``) + `</div>`;
+					</div>`;
 
           if (user['stars'] == 5 && texts['twi-c1']) {
             $('div.wizard-twi').html(texts['twi-c1']).animate({ opacity: 1.0 }, dr);

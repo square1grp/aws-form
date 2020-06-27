@@ -418,14 +418,12 @@ body {
   min-height: 90px;
 }
 
-.email-label,
-.comment-label {
+*[class$="-label"] {
   font-size: 13px;
   font-weight: 400;
 }
 
-.email-input,
-.comment-input {
+*[class$="-input"] {
   margin-bottom: 7px;
   box-shadow: none;
   font-size: 16px;
@@ -454,8 +452,7 @@ body {
   background-image: none;
 }
 
-.email-input:focus,
-.comment-input:focus {
+*[class$="-input"]:focus {
   background-image: linear-gradient(rgb(76, 175, 80), rgb(76, 175, 80));
   background-size: 100% 2px;
 }
@@ -711,5 +708,46 @@ a.orange:active {
 }
 
 #popup a:hover {
+  opacity: 0.75;
+}
+
+.form-group-row {
+  display: flex;
+}
+
+.form-group-col {
+  flex-grow: 1;
+}
+
+.form-group-col:first-child:not(:last-child) {
+  margin-right: 10px;
+}
+
+.form-group-col:last-child:not(:first-child) {
+  margin-left: 10px;
+}
+
+.form-group-col label.required::after {
+  content: "*";
+  margin-left: 4px;
+  color: red;
+}
+
+form button[submit] {
+  background-color: #4caf50;
+  box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
+    0 8px 10px -5px rgba(76, 175, 80, 0.4);
+  color: #fff;
+  padding: 12px 0 12px 0;
+  width: 150px;
+  display: block;
+  margin: 30px auto 0;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+form button[submit]:hover {
   opacity: 0.75;
 }

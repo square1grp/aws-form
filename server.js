@@ -49,6 +49,26 @@ models.sequelize.sync().then(() => {
         })
         break
 
+      case 'make-an-offer':
+        params = JSON.parse(req.body.json)
+
+        modules.makeAnOffer({
+          first_name: params.first_name,
+          last_name: params.last_name,
+          email: params.email,
+          address: params.address,
+          city: params.city,
+          state: params.state,
+          zipcode: params.zipcode,
+          phone: params.phone,
+          receive_by: params.receive_by
+        })
+
+        res.send({
+          'status': 'success'
+        })
+        break
+
       default:
         res.send('"action" is not determined.')
     }

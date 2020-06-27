@@ -1,6 +1,6 @@
 require('dotenv').config()
 var amazonMws = require('amazon-mws')(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY)
-const { Comment } = require('./models')
+const { Comment, Offer } = require('./models')
 
 module.exports = {
   getOrder: (orderId) => {
@@ -25,7 +25,13 @@ module.exports = {
   },
 
   saveComment: async (email, comment) => {
-    await Comment.create({ email, comment });
+    await Comment.create({ email, comment })
+
+    return true
+  },
+
+  makeAnOffer: async (offerInfo) => {
+    await Offer.create(offerInfo)
 
     return true
   }
