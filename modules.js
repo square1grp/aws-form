@@ -24,8 +24,8 @@ module.exports = {
     });
   },
 
-  saveComment: async (email, comment) => {
-    await Comment.create({ email, comment })
+  saveComment: async ({ email, order, sku, asin, stars, comment }) => {
+    await Comment.create({ email, order, sku, asin, stars, comment })
 
     return true
   },

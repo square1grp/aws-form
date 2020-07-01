@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Comment.init({
     email: DataTypes.STRING,
+    order: DataTypes.STRING,
+    sku: DataTypes.STRING,
+    asin: DataTypes.STRING,
+    stars: DataTypes.STRING,
     comment: DataTypes.STRING
   }, {
     sequelize,

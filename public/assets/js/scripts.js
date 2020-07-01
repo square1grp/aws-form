@@ -61,7 +61,7 @@ $(document).ready(function () {
           html = `
 				<div class="wizard-text">
 					<h4 class="text-info">${texts['00_text-info']}</h4>
-					<p class="text-find-it"><a href="https://www.amazon.com/gp/css/order-history?ie=UTF8&amp;ref_=nav_nav_orders_first&amp;" target="_blank">${texts['00_find-it-here']}</a></p>
+					<p class="text-find-it"><a href="${texts['00_find-it-here-link']}" target="_blank">${texts['00_find-it-here']}</a></p>
 				</div>
 				<form class="form-order-id">
 					<label class="order-id-label" for="OrderId">${texts['00_order-id-label']}</label>
@@ -161,18 +161,10 @@ $(document).ready(function () {
           html = `
 				<div class="wizard-text">
 					<h4 class="text-info-after-stars">${args[1]}</h4>
-					<p class="text-find-it"><a href="" id="findAnother">${texts['01_find-another']}</a></p>
+					<p class="text-find-it"><a href="${texts['00_find-it-here-link']}" target="_blank">${texts['00_find-it-here']}</a></p>
 				</div>`;
 
           $wizard.html(html);
-
-          $('#findAnother').off('click');
-
-          $('#findAnother').click(function (e) {
-            $('#findAnother').off('click');
-            closeState(0);
-            return false;
-          });
         })();
         break;
       case 2:
@@ -385,7 +377,7 @@ $(document).ready(function () {
               <p class="text-leave-small"><a href="https://www.amazon.com/gp/css/order-history" target="_blank">${texts['04_small-feedback']}</a></p>
             </div>
             <div class="wizard-leave-feedback">
-              <h4 class="text-info"><a href="${links['create-review']}" target="_blank">${texts['04_write-a-review']}</a></h4>
+              <h4 class="text-info"><a href="https://www.amazon.com/gp/css/order-history" target="_blank">${texts['04_write-a-review']}</a></h4>
             </div>
             <div class="wizard-text">
               <p style="margin-left: 10%; margin-right: 10%;">${texts['04_text-after-write-a-review']}</p>

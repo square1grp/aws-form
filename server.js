@@ -5,8 +5,9 @@ const app = express()
 const port = 3000
 const modules = require('./modules')
 
+const models = require('./models')
 
-const models = require('./models');
+const site_admin_email = 'support@FCfreeoffer.com'
 
 models.sequelize.sync().then(() => {
   app.use(express.static('public'))
@@ -33,16 +34,17 @@ models.sequelize.sync().then(() => {
           } else {
             res.send({
               'status': 'success',
-              'answer': 'We are unable to&nbsp;find your order. Make sure it’s<br>the&nbsp;order&nbsp;ID for&nbsp;ELLIEVE ORGANICS.<br>If&nbsp;you have placed an&nbsp;order recently, wait<br>for the&nbsp;goods to&nbsp;be delivered.'
+              'answer': "We are unable to find your order. Please confirm you entered the correct order ID and try again. If you continue to have issues, email <a href=\"mailto:" + site_admin_email + "?subject=Mail from Site\">" + site_admin_email + "<\/a>"
             })
           }
         })
         break
 
+      case 'save-email':
       case 'save-comment':
         params = JSON.parse(req.body.json)
 
-        modules.saveComment(params.email, params.comment)
+        modules.saveComment(params)
 
         res.send({
           'status': 'success'
@@ -75,4 +77,4 @@ models.sequelize.sync().then(() => {
   })
 
   app.listen(port, () => console.log(`AWS MWS Form app listening at http://localhost:${port}`))
-});
+})

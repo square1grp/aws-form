@@ -11,6 +11,18 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      order: {
+        type: Sequelize.STRING
+      },
+      sku: {
+        type: Sequelize.STRING
+      },
+      asin: {
+        type: Sequelize.STRING
+      },
+      stars: {
+        type: Sequelize.STRING
+      },
       comment: {
         type: Sequelize.STRING
       },
