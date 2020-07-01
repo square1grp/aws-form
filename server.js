@@ -7,7 +7,7 @@ const modules = require('./modules')
 
 const models = require('./models')
 
-const site_admin_email = 'support@FCfreeoffer.com'
+const site_admin_email = 'support@DRfreeoffer.com'
 
 models.sequelize.sync().then(() => {
   app.use(express.static('public'))

@@ -130,7 +130,7 @@ body {
 
 .navigation-moving-tab {
   position: absolute;
-  background-color: #01a54e;
+  background-color: #7dd453;
   box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
     0 8px 10px -5px rgba(76, 175, 80, 0.4);
   position: absolute;
@@ -453,7 +453,7 @@ body {
 }
 
 *[class$="-input"]:focus {
-  background-image: linear-gradient(rgb(21, 154, 225), rgb(21, 154, 225));
+  background-image: linear-gradient(rgb(127, 214, 85), rgb(127, 214, 85));
   background-size: 100% 2px;
 }
 
@@ -567,16 +567,15 @@ a:hover {
 
 a.orange {
   color: #fef4e9;
-  border: solid 1px #159ae1;
-  background: -webkit-gradient(linear, left top, left bottom, from(#159ae1), to(#130b59));
+  background: #2f2f2f;
+  border: 1px solid #2f2f2f;
 }
 a.orange:hover {
-  background: #f47c20;
-  background: -webkit-gradient(linear, left top, left bottom, from(#159ae1), to(#159ae1));
+  opacity: 0.75;
 }
 a.orange:active {
-  color: #fcd3a5;
-  background: -webkit-gradient(linear, left top, left bottom, from(#130b59), to(#159ae1));
+  background: #2f2f2f;
+  border: 1px solid #222;
 }
 
 .club-button {
@@ -688,9 +687,9 @@ a.orange:active {
 }
 
 #popup a {
-  background-color: #159ae1;
-  box-shadow: 0 16px 26px -10px rgba(21, 154, 225, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
-    0 8px 10px -5px rgba(21, 154, 225, 0.4);
+  background-color: #2f2f2f;
+  box-shadow: 0 16px 26px -10px rgba(11, 11, 11, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
+    0 8px 10px -5px rgba(11, 11, 11, 0.4);
   color: #fff;
   padding: 12px 0 12px 0;
   width: 150px;
@@ -727,9 +726,9 @@ a.orange:active {
 }
 
 form button[submit] {
-  background-color: #159ae1;
-  box-shadow: 0 16px 26px -10px rgba(21, 154, 225, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
-    0 8px 10px -5px rgba(21, 154, 225, 0.4);
+  background-color: #2f2f2f;
+  box-shadow: 0 16px 26px -10px rgba(11, 11, 11, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
+    0 8px 10px -5px rgba(11, 11, 11, 0.4);
   color: #fff;
   padding: 12px 0 12px 0;
   width: 150px;
