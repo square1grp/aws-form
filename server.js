@@ -63,7 +63,7 @@ models.sequelize.sync().then(() => {
           state: params.state,
           zipcode: params.zipcode,
           phone: params.phone,
-          receive_by: params.receive_by
+          receive_by: params.receive_by.join(', ')
         })
 
         res.send({

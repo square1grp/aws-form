@@ -10,7 +10,7 @@ $(document).ready(function () {
   }
   var user = {};
 
-  initState(0);
+  initState(6);
 
   function resizeNavigation() {
     let $nav = $('.navigation-button').eq(motab);
@@ -60,14 +60,19 @@ $(document).ready(function () {
           motab = 0;
           html = `
 				<div class="wizard-text">
-					<h4 class="text-info">${texts['00_text-info']}</h4>
+					<h4 class="text-info">${texts['00_text-info-1']}</h4>
 					<p class="text-find-it"><a href="${texts['00_find-it-here-link']}" target="_blank">${texts['00_find-it-here']}</a></p>
 				</div>
 				<form class="form-order-id">
 					<label class="order-id-label" for="OrderId">${texts['00_order-id-label']}</label>
 					<input class="order-id-input" id="OrderId" name="OrderId" type="text" value="" maxlength="30" autocomplete="off">
-					<label id="errorMessage" class="order-id-error" for="OrderId"></label>
-				</form>`;
+          <label id="errorMessage" class="order-id-error" for="OrderId"></label>
+        </form>
+          
+        <div class="wizard-text">
+          <h4 class="text-info" style="width: 100%; margin: 0px;">${texts['00_text-info-2']}</h4>
+        </div>
+        `;
 
           $wizard.html(html);
 
@@ -481,9 +486,9 @@ $(document).ready(function () {
 
               <br/>
 
-              <input type="radio" id="receive_by_email" name="receive_by" value="email" checked>
+              <input type="checkbox" id="receive_by_email" class="receive_by" value="email">
               <label for="receive_by_email">Yes! Please sign me up to receive offers in my email.</label><br/>
-              <input type="radio" id="receive_by_sms" name="receive_by" value="sms">
+              <input type="checkbox" id="receive_by_sms" class="receive_by" value="sms">
               <label for="receive_by_sms">Yes! Please sign me up to receive offers by text message.</label><br/>
 
               <br/>
@@ -500,15 +505,11 @@ $(document).ready(function () {
             var data = {};
             data['action'] = 'make-an-offer';
 
-            var receive_by_options = document.getElementsByName('receive_by');
-            var receive_by;
+            var receive_by = [];
 
-            for (var i = 0, length = receive_by_options.length; i < length; i++) {
-              if (receive_by_options[i].checked) {
-                receive_by = receive_by_options[i].value;
-                break;
-              }
-            }
+            $.each($("input[type=checkbox].receive_by:checked"), function(idx, ele) {
+              receive_by.push($(ele).val());
+            });
 
             data['json'] = JSON.stringify({
               first_name: $("#first_name").val().trim(),
@@ -561,10 +562,6 @@ $(document).ready(function () {
 					<div class="wizard-text">
 						<h4 class="text-info-thanks">${texts['07_thank-you-45']}</h4>
 					</div>`;
-
-          if (user['stars'] == 5 && texts['twi-c1']) {
-            $('div.wizard-twi').html(texts['twi-c1']).animate({ opacity: 1.0 }, dr);
-          }
 
           $wizard.html(html);
         })();
