@@ -10,7 +10,7 @@ $(document).ready(function () {
   }
   var user = {};
 
-  initState(6);
+  initState(0);
 
   function resizeNavigation() {
     let $nav = $('.navigation-button').eq(motab);
