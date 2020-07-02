@@ -28,11 +28,12 @@
     var site_admin_email = "support@FCfreeoffer.com";
 
     var texts = {
-      "00_text-info": "Enter your Amazon order ID below (Example: 123-1234567-1234567). NOTE: this promotion is limited to one per household.",
+      "00_text-info-1": "Enter your Amazon order ID below (Example: 123-1234567-1234567).",
+      "00_text-info-2": "NOTE: this promotion is limited to one per household.",
       "00_find-it-here-link": "https://www.amazon.com/gp/css/order-history?ie=UTF8&amp;ref_=nav_nav_orders_first&amp;",
       "00_find-it-here": "Find your order ID here",
       "00_order-id-label": "Your Amazon order ID",
-      "00_order-id-error": "Enter your Amazon order ID below (Example: 123-1234567-1234567). NOTE: this promotion is limited to one per household.",
+      "00_order-id-error": "Enter your Amazon order ID below (Example: 123-1234567-1234567).",
       "02_text-rate": "How has your experience been so far with your order and product?",
       "02_rating5": "Thanks! <span class=\"text-info-smiley\">:)<\/span>",
       "02_rating4": "Thanks!",
@@ -60,10 +61,7 @@
       "09_text-final-13": "Our experts are already solving your problem.",
       "09_support-13": "If more than a&nbsp;day has passed and you have not been contacted, please, write directly to&nbsp;us.",
       "09_email-link-13": "<a href=\"mailto:" + site_admin_email + "?subject=Mail from Site\">" + site_admin_email + "<\/a>",
-      "09_thank-you-13": "Thank you.",
-      "07_follow-us": "Get more SPECIAL OFFERS and DISCOUNTS!<br>Follow&nbsp;us on&nbsp;Twitter<\/h4>",
-      "07_twitter": "<a href=\"https:\/\/twitter.com\/intent\/tweet?screen_name=Giveaways_time&ref_src=twsrc%5Etfw\" class=\"twitter-mention-button\" data-show-count=\"false\">Tweet to @Giveaways_time<\/a><script async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"><\/script>",
-      "twi-c1": "<a href=\"https:\/\/twitter.com\/FreeGiveawaysC1\" target=\"_blank\"><img alt=\"Follow us on Twitter\" src=\"\/assets\/images\/twi.png\"><\/a>"
+      "09_thank-you-13": "Thank you."
     };
   </script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -78,7 +76,6 @@
       <div class="container">
         <div class="wizard-container">
           <div id="wizard" class="wizard-card">
-            <div class="wizard-twi"></div>
             <div class="wizard-header">
               <h3 class="wizard-title">Claim your FREE offer below!</h3>
             </div>
@@ -93,8 +90,7 @@
             </div>
             <div class="wizard-body" style="opacity: 1;">
               <div class="wizard-text">
-                <h4 class="text-info">Enter your Amazon order ID below (Example: 123-1234567-1234567). NOTE: this
-                  promotion is limited to one per household.</h4>
+                <h4 class="text-info">Enter your Amazon order ID below (Example: 123-1234567-1234567).</h4>
                 <p class="text-find-it"><a
                     href="https://www.amazon.com/gp/css/order-history?ie=UTF8&ref_=nav_nav_orders_first&"
                     target="_blank">Find your order ID here</a></p>
@@ -105,6 +101,10 @@
                   autocomplete="off" style="cursor: auto;">
                 <label id="errorMessage" class="order-id-error" for="OrderId"></label>
               </form>
+
+              <div class="wizard-text">
+                <h4 class="text-info">NOTE: this promotion is limited to one per household.</h4>
+              </div>
             </div>
           </div>
         </div>

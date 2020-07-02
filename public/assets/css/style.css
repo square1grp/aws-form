@@ -352,11 +352,11 @@ body {
 
 .form-order-id {
   position: relative;
-  padding: 30px 15px 30px 15px;
+  padding: 15px;
   margin-left: auto;
   margin-right: auto;
   width: 70%;
-  min-height: 160px;
+  min-height: 130px;
 }
 
 .order-id-label {
