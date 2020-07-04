@@ -10,7 +10,7 @@ $(document).ready(function () {
   }
   var user = {};
 
-  initState(0);
+  initState(3);
 
   function resizeNavigation() {
     let $nav = $('.navigation-button').eq(motab);
@@ -247,11 +247,9 @@ $(document).ready(function () {
               <h4 class="text-info">${texts['04_text-info']}</h4>
             </div>
             <form class="form-email-short">
-              <label class="email-label" for="email">Your email</label>
-              <input class="email-input" id="email" name="email" type="text" value="" maxlength="60" autocomplete="off">
-              <label id="errorMessage" class="email-error" for="email">${texts['04_email-error']}</label>
               <label class="comment-label" for="comment">Your comment</label>
               <textarea class="comment-input" id="comment" name="comment" rows="5" cols="65"></textarea>
+              <label id="errorComment" class="comment-error" for="comment">${texts['04_comment-error']}</label>
             </form>
             <div class="wizard-leave-feedback">
               <h3 class="text-leave-feedback"><a class="leave-button orange" href="javascript:void(0)">${texts['04_leave-feedback']}</a></h3>
@@ -267,10 +265,8 @@ $(document).ready(function () {
 
           $('.wizard-leave-feedback a').click(function (e) {
             if (is_input_ok) {
-              user['email'] = $('#email').val().trim();
               user['comment'] = $('#comment').val();
 
-              $('.email-input').off('input focus blur');
               API(user, 'save-comment');
 
               function API(json, action) {
@@ -319,9 +315,9 @@ $(document).ready(function () {
                 }
               }
             } else {
-              var $err = $('#errorMessage');
+              var $err = $('#errorComment');
               $err.animate({ opacity: 0.0 }, dr / 2, function () {
-                $err.html(texts['04_email-error']).css({ opacity: 0.0, visibility: 'visible' });
+                $err.html(texts['04_comment-error']).css({ opacity: 0.0, visibility: 'visible' });
                 $err.animate({ opacity: 1.0 }, dr);
               });
             }
@@ -330,30 +326,29 @@ $(document).ready(function () {
           });
 
           $('form').off('submit');
-          $('.email-input').off('input focus blur');
+          $('.comment-input').off('input focus blur');
 
           $('form').submit(false);
 
-          $('.email-input').on('input focus blur', function (e) {
+          $('.comment-input').on('input focus blur', function (e) {
             is_input_ok = inputCheck(e.type, $(e.target));
           });
 
           function inputCheck(type, $elm) {
             var ret = false;
-            var reg = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
             var txt = '';
             var val = $elm.val().trim();
             if (val) {
-              if (!reg.test(val)) {
-                txt = texts['04_email-error'];
-                reg = /^[^@\s]+$|^[^@\s]+@$|^[^@\s]+@[^@\s]+$|^[^@\s]+@[^@\s]+\.$|^[^@\s]+@[^@\s]+\.[^@\s]{1}$/;
-                if (type != 'blur') if (reg.test(val)) { txt = ''; }
+              if (val.length < 15) {
+                txt = texts['04_comment-error'];
+
+                if (type != 'blur' && val.length != 15) { txt = ''; }
               } else {
                 ret = true;
               }
             }
-            var $err = $('#errorMessage');
-            var msg = $('#errorMessage').html();
+            var $err = $('#errorComment');
+            var msg = $('#errorComment').html();
             if (txt != msg) {
               $err.animate({ opacity: 0.0 }, dr / 2, function () {
                 if (txt != '') {
@@ -507,7 +502,7 @@ $(document).ready(function () {
 
             var receive_by = [];
 
-            $.each($("input[type=checkbox].receive_by:checked"), function(idx, ele) {
+            $.each($("input[type=checkbox].receive_by:checked"), function (idx, ele) {
               receive_by.push($(ele).val());
             });
 

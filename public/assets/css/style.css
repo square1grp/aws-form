@@ -457,6 +457,7 @@ body {
   background-size: 100% 2px;
 }
 
+.comment-error,
 .email-error {
   font-size: 15px;
   font-weight: 400;
@@ -464,6 +465,7 @@ body {
   opacity: 0;
   visibility: hidden;
   display: block;
+  min-height: 1.5em;
 }
 
 .text-send-it,
