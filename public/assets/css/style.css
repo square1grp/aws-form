@@ -130,9 +130,9 @@ body {
 
 .navigation-moving-tab {
   position: absolute;
-  background-color: #7dd453;
-  box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
-    0 8px 10px -5px rgba(76, 175, 80, 0.4);
+  background-color: #e50062;
+  box-shadow: 0 16px 26px -10px rgba(229, 0, 98, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
+    0 8px 10px -5px rgba(229, 0, 98, 0.4);
   position: absolute;
   text-align: center;
   padding: 12px 0 12px 0;
@@ -306,13 +306,13 @@ body {
 }
 
 .leave-btn {
-  border: 3px solid #01a54e;
+  border: 3px solid #e00d5d;
   border-radius: 9px;
   margin: 0 auto 18px auto;
   padding-left: 9px;
   padding-right: 9px;
   width: 50%;
-  background-color: #b0f1b2;
+  background-color: #e00d5d;
   box-shadow: 0 8px 12px 2px rgba(0, 0, 0, 0.14), 0 3px 15px 5px rgba(0, 0, 0, 0.12), 0 4px 5px -5px rgba(0, 0, 0, 0.2);
   display: inline-block;
 }
@@ -453,7 +453,7 @@ body {
 }
 
 *[class$="-input"]:focus {
-  background-image: linear-gradient(rgb(127, 214, 85), rgb(127, 214, 85));
+  background-image: linear-gradient(#e00d5d, #e00d5d);
   background-size: 100% 2px;
 }
 
@@ -472,9 +472,9 @@ body {
 .text-send-it__disabled {
   line-height: 18px;
   position: relative;
-  background-color: #01a54e;
-  box-shadow: 0 16px 26px -10px rgba(76, 175, 80, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
-    0 8px 10px -5px rgba(76, 175, 80, 0.4);
+  background-color: #e00d5d;
+  box-shadow: 0 16px 26px -10px rgba(229, 0, 98, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
+    0 8px 10px -5px rgba(229, 0, 98, 0.4);
   text-align: center;
   padding: 6px 0 6px 0;
   font-size: 12px;
@@ -569,14 +569,14 @@ a:hover {
 
 a.orange {
   color: #fef4e9;
-  background: #2f2f2f;
-  border: 1px solid #2f2f2f;
+  background: #e00d5d;
+  border: 1px solid #e00d5d;
 }
 a.orange:hover {
   opacity: 0.75;
 }
 a.orange:active {
-  background: #2f2f2f;
+  background: #e00d5d;
   border: 1px solid #222;
 }
 
@@ -689,7 +689,7 @@ a.orange:active {
 }
 
 #popup a {
-  background-color: #2f2f2f;
+  background-color: #e00d5d;
   box-shadow: 0 16px 26px -10px rgba(11, 11, 11, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
     0 8px 10px -5px rgba(11, 11, 11, 0.4);
   color: #fff;
@@ -728,7 +728,7 @@ a.orange:active {
 }
 
 form button[submit] {
-  background-color: #2f2f2f;
+  background-color: #e00d5d;
   box-shadow: 0 16px 26px -10px rgba(11, 11, 11, 0.56), 0 4px 25px 0 rgba(0, 0, 0, 0.24),
     0 8px 10px -5px rgba(11, 11, 11, 0.4);
   color: #fff;
