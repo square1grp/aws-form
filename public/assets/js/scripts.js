@@ -469,12 +469,12 @@ $(document).ready(function () {
 
               <div class="form-group-row">
                 <div class="form-group-col">
-                  <label class="zipcode-label required" for="email">Zip code</label>
+                  <label class="zipcode-label required" for="zipcode">Zip code</label>
                   <input class="zipcode-input" id="zipcode" name="zipcode" type="text" value="" maxlength="60" autocomplete="off">
                 </div>
                 
                 <div class="form-group-col">
-                  <label class="phone-label" for="phone">Phone</label>
+                  <label class="phone-label unrequired" for="phone">Phone</label>
                   <input class="phone-input" id="phone" name="phone" type="text" value="" maxlength="60" autocomplete="off">
                 </div>
               </div>
